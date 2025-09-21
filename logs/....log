@@ -1,0 +1,23 @@
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "body": "This is an email with subject: ...", 
+    "subject": "...", 
+    "to": "test@example.com"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip, deflate", 
+    "Content-Length": "75", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Cookie": "session=your_cookie_value", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Python/3.10 aiohttp/3.12.15", 
+    "X-Amzn-Trace-Id": "Root=1-68cbf826-3c1b3a0d342cc566025db040"
+  }, 
+  "json": null, 
+  "origin": "188.113.220.205", 
+  "url": "https://httpbin.org/post"
+}
