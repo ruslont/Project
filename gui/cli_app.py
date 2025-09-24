@@ -1,49 +1,24 @@
-import os
-import subprocess
+import asyncio
+from project_parallel import send_email
 
-LOGS_DIR = "../logs"
-
-def list_logs():
-    logs = [f for f in os.listdir(LOGS_DIR) if f.endswith(".log")]
-    for idx, log in enumerate(logs, start=1):
-        print(f"{idx}. {log}")
-    return logs
-
-def view_log():
-    logs = list_logs()
-    choice = input("Qaysi logni ko‘rmoqchisiz (raqam bilan): ")
-    try:
-        idx = int(choice) - 1
-        if 0 <= idx < len(logs):
-            log_path = os.path.join(LOGS_DIR, logs[idx])
-            with open(log_path, "r") as f:
-                print(f.read())
-        else:
-            print("Noto‘g‘ri raqam.")
-    except Exception as e:
-        print(f"Xatolik: {e}")
-
-def send_test_email():
-    # Parallel scriptni chaqiramiz
-    subprocess.run(["python3", "../project_parallel.py"])
-
-def main():
+async def main():
     while True:
-        print("\n=== Project CLI Menu ===")
-        print("1. Test email yuborish")
-        print("2. Loglarni ko‘rish")
-        print("3. Chiqish")
-        choice = input("Tanlang (1-3): ")
+        print("\n=== Меню рассылки ===")
+        print("1. Отправить тестовое письмо")
+        print("2. Выход")
+        choice = input("Выберите (1-2): ")
 
         if choice == "1":
-            send_test_email()
-            print("✅ Test email yuborildi. Natija ../logs/cli_send_email.log faylida.")
+            recipient = input("Введите email получателя: ")
+            subject = input("Введите тему письма (Subject): ")
+            body = input("Введите текст письма: ")
+            await send_email(recipient, subject, body)
+            print("✅ Письмо успешно отправлено!")
         elif choice == "2":
-            view_log()
-        elif choice == "3":
+            print("Выход из программы...")
             break
         else:
-            print("Noto‘g‘ri tanlov. Qaytadan urinib ko‘ring.")
+            print("❌ Неверный выбор! Попробуйте снова.")
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
